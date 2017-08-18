@@ -17,7 +17,7 @@ DOM_ELEMENT_TEMPLATE = (
 		'<div class="{}">{}</div>',
 	)
 
-def generate(is_tag: bool = True, block_num: int = 10, css_rule_num: int = 10, file_name: str = 'index.html'):
+def generate(is_tag: bool = True, block_num: int = 10, css_rule_num: int = 10, file_name: str = 'index.html', no_apply_css: bool = False):
 	with open(file_name, 'w') as f:
 		f.write(LINE_TEMPLATE.format(TEMPLATE[0]))
 
@@ -42,10 +42,12 @@ def generate(is_tag: bool = True, block_num: int = 10, css_rule_num: int = 10, f
 		
 		css_rule_i = 0
 		for num in range(block_num):
-			selector_curr = TEST_SELECTOR_TEMPLATE[0].format(css_rule_i)
-			css_rule_i += 1
-			if css_rule_i >= css_rule_num:
-				css_rule_i = 0
+			selector_curr = ''
+			if not no_apply_css:
+				selector_curr = TEST_SELECTOR_TEMPLATE[0].format(css_rule_i)
+				css_rule_i += 1
+				if css_rule_i >= css_rule_num:
+					css_rule_i = 0
 
 			f.write(LINE_TEMPLATE.format(el).format(selector_curr, num))
 
@@ -59,6 +61,7 @@ def _get_rand_color():
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--is_tag", action="store_true")
+	parser.add_argument("--no_apply_css", action="store_true")
 	parser.add_argument("--block_num", type=int, default=10)
 	parser.add_argument("--css_rule_num", type=int, default=10)
 	parser.add_argument("--file_name", type=str, default='index.html')

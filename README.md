@@ -2,8 +2,10 @@
 
 ## Usage
 ```
-python3 generator.py [--is_tag] [--block_num=10] [--css_rule_num=10] [--file_name="index.html"]
+python3 generator.py [--is_tag] [--no_apply_css] [--block_num=10] [--css_rule_num=10] [--file_name="index.html"]
 ```
+is_tag - forces the generator to create styles with tag selectors (classes are used by default)
+no_apply_css - leaves DOm elements unstyled (emply classes, no tags applied)
 
 ## What does it do?
 generator.py produces an HTML file with a number (specified in block_num) of div blocks inside. A set of classes or tags (depending on is_tag switch) is generated as well. Each CSS rule sets background-color porperty.
