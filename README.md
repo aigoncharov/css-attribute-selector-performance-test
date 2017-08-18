@@ -1,4 +1,4 @@
-# css-tag-selector-test
+# css-attribute-selector-test
 
 ## Usage
 ```
